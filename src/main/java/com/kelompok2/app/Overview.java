@@ -16,9 +16,12 @@ public class Overview extends javax.swing.JFrame {
      * Creates new form Overview
      */
     public Overview() {
-        initComponents();
-        chart.setTitle("Bahan Pangan");
-        chart.addLegend("amount", Color.red, Color.blue);
+        initComponents(); 
+        chart.setTitle("UMP");
+        chart.addLegend("amount", Color.red, Color.green);
+        chart1.setTitle("Bahan Pangan");
+        chart1.addLegend("amount", Color.green, Color.blue);
+        
     }
 
     /**
@@ -31,48 +34,62 @@ public class Overview extends javax.swing.JFrame {
     private void initComponents() {
 
         curveLineChart1 = new com.kelompok2.chart.CurveLineChart();
-        panelShadow1 = new com.kelompok2.panel.PanelShadow();
+        jFormattedTextField1 = new javax.swing.JFormattedTextField();
+        panelGradient1 = new com.kelompok2.panel.PanelGradient();
+        panelGradient2 = new com.kelompok2.panel.PanelGradient();
+        jLabel1 = new javax.swing.JLabel();
+        panelGradient3 = new com.kelompok2.panel.PanelGradient();
+        chart1 = new com.kelompok2.chart.CurveLineChart();
         chart = new com.kelompok2.chart.CurveLineChart();
 
+        jFormattedTextField1.setText("jFormattedTextField1");
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(0, 51, 255));
 
-        panelShadow1.setBackground(new java.awt.Color(13, 58, 82));
-        panelShadow1.setColorGradient(new java.awt.Color(0, 0, 0));
+        panelGradient1.setBackground(new java.awt.Color(24, 43, 61));
+        panelGradient1.setColorGradient(new java.awt.Color(19, 51, 89));
 
-        chart.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        panelGradient2.setBackground(new java.awt.Color(19, 51, 89));
+        panelGradient2.setForeground(new java.awt.Color(24, 43, 61));
+        panelGradient2.setColorGradient(new java.awt.Color(24, 43, 61));
 
-        javax.swing.GroupLayout panelShadow1Layout = new javax.swing.GroupLayout(panelShadow1);
-        panelShadow1.setLayout(panelShadow1Layout);
-        panelShadow1Layout.setHorizontalGroup(
-            panelShadow1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelShadow1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(chart, javax.swing.GroupLayout.DEFAULT_SIZE, 603, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        panelShadow1Layout.setVerticalGroup(
-            panelShadow1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelShadow1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(chart, javax.swing.GroupLayout.DEFAULT_SIZE, 453, Short.MAX_VALUE)
-                .addContainerGap())
-        );
+        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel1.setFont(new java.awt.Font("Yu Gothic", 3, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Overview");
+        panelGradient2.add(jLabel1);
+        jLabel1.setBounds(10, 20, 130, 40);
+
+        panelGradient3.setBackground(new java.awt.Color(19, 51, 89));
+        panelGradient3.setColorGradient(new java.awt.Color(24, 43, 61));
+        panelGradient3.add(chart1);
+        chart1.setBounds(250, 10, 200, 210);
+        panelGradient3.add(chart);
+        chart.setBounds(30, 10, 200, 210);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(panelShadow1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(panelGradient1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(panelGradient2, javax.swing.GroupLayout.DEFAULT_SIZE, 480, Short.MAX_VALUE)
+                    .addComponent(panelGradient3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelShadow1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panelGradient1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(panelGradient2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(panelGradient3, javax.swing.GroupLayout.DEFAULT_SIZE, 372, Short.MAX_VALUE))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     /**
@@ -112,7 +129,12 @@ public class Overview extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.kelompok2.chart.CurveLineChart chart;
+    private com.kelompok2.chart.CurveLineChart chart1;
     private com.kelompok2.chart.CurveLineChart curveLineChart1;
-    private com.kelompok2.panel.PanelShadow panelShadow1;
+    private javax.swing.JFormattedTextField jFormattedTextField1;
+    private javax.swing.JLabel jLabel1;
+    private com.kelompok2.panel.PanelGradient panelGradient1;
+    private com.kelompok2.panel.PanelGradient panelGradient2;
+    private com.kelompok2.panel.PanelGradient panelGradient3;
     // End of variables declaration//GEN-END:variables
 }

@@ -36,8 +36,9 @@ public class LinearCorrelation {
 
             return numerator / denominator;
         } catch (IllegalArgumentException | ArithmeticException ex) {
-            System.out.println();
+            System.out.println(ex.getMessage());
         }
+        return 0d;
     }
 
 }
