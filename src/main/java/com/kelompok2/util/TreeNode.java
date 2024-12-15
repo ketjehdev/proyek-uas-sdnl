@@ -8,28 +8,28 @@ package com.kelompok2.util;
  *
  * @author LENOVO
  */
-public class TreeNode {
+public class TreeNode{
     // Data yang disimpan di simpul
 
-    private int Data;
+    private int data;
     // Referensi ke anak kiri dan kanan
     private TreeNode leftNode;
     private TreeNode rightNode;
     // Referensi ke parent (simpul induk)
-    private TreeNode Parent;
+    private TreeNode parent;
 
     // Constructor untuk membuat simpul dengan data tertentu
-    public TreeNode(int Data) {
-        this.Data = Data;
+    public TreeNode(int data) {
+        this.data = data;
     }
 
     // Getter dan setter untuk data dan simpul anak/kiri/kanan/parent
     public int getData() {
-        return Data;
+        return data;
     }
 
-    public void setData(int Data) {
-        this.Data = Data;
+    public void setData(int data) {
+        this.data = data;
     }
 
     public TreeNode getLeftNode() {
@@ -49,10 +49,10 @@ public class TreeNode {
     }
 
     public TreeNode getParent() {
-        return Parent;
+        return parent;
     }
 
-    public void setParent(TreeNode Parent) {
-        this.Parent = Parent;
+    public void setParent(TreeNode parent) {
+        this.parent = parent;
     }
 }

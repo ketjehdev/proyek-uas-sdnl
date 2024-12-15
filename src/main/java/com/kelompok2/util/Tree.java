@@ -4,7 +4,6 @@
  */
 package com.kelompok2.util;
 
-import java.util.List;
 
 /**
  *
@@ -112,7 +111,7 @@ public class Tree {
     }
     // Metode untuk mencari simpul berdasarkan data
 
-    public TreeNode search(int Data) {
+    public TreeNode search(double Data) {
         if (root == null) {  // Jika tree kosong
             System.out.println("Pohon kosong, data tidak ditemukan");
             return null;

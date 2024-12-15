@@ -4,7 +4,12 @@
  */
 package com.kelompok2.app;
 
+import com.kelompok2.util.LinearCorrelation;
+import com.kelompok2.util.Tree;
 import java.awt.Color;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -16,12 +21,12 @@ public class Overview extends javax.swing.JFrame {
      * Creates new form Overview
      */
     public Overview() {
-        initComponents(); 
+        initComponents();
         chart.setTitle("UMP");
         chart.addLegend("amount", Color.red, Color.green);
         chart1.setTitle("Bahan Pangan");
         chart1.addLegend("amount", Color.green, Color.blue);
-        
+
     }
 
     /**
@@ -50,17 +55,16 @@ public class Overview extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         managementData = new com.kelompok2.panel.PanelGradient();
-        jTextField1 = new javax.swing.JTextField();
+        umpField = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        panganField = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        provinceCombo = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        createData = new javax.swing.JButton();
+        deleteData = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tableData = new javax.swing.JTable();
 
         jFormattedTextField1.setText("jFormattedTextField1");
 
@@ -191,13 +195,13 @@ public class Overview extends javax.swing.JFrame {
         managementData.setBackground(new java.awt.Color(187, 187, 187));
         managementData.setColorGradient(new java.awt.Color(0, 0, 51));
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        umpField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                umpFieldActionPerformed(evt);
             }
         });
-        managementData.add(jTextField1);
-        jTextField1.setBounds(330, 40, 140, 30);
+        managementData.add(umpField);
+        umpField.setBounds(330, 40, 140, 30);
 
         jLabel1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -205,13 +209,13 @@ public class Overview extends javax.swing.JFrame {
         managementData.add(jLabel1);
         jLabel1.setBounds(330, 20, 140, 14);
 
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        panganField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                panganFieldActionPerformed(evt);
             }
         });
-        managementData.add(jTextField2);
-        jTextField2.setBounds(520, 40, 160, 30);
+        managementData.add(panganField);
+        panganField.setBounds(520, 40, 160, 30);
 
         jLabel2.setBackground(new java.awt.Color(255, 255, 255));
         jLabel2.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
@@ -220,9 +224,9 @@ public class Overview extends javax.swing.JFrame {
         managementData.add(jLabel2);
         jLabel2.setBounds(510, 20, 180, 14);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        managementData.add(jComboBox1);
-        jComboBox1.setBounds(130, 40, 130, 30);
+        provinceCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Banten", "DKI Jakarta", "Jawa Barat", "Jawa Tengah", "DI Yogyakarta", "Jawa Timur" }));
+        managementData.add(provinceCombo);
+        provinceCombo.setBounds(130, 40, 130, 30);
 
         jLabel3.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -230,47 +234,51 @@ public class Overview extends javax.swing.JFrame {
         managementData.add(jLabel3);
         jLabel3.setBounds(100, 20, 180, 14);
 
-        jButton2.setBackground(new java.awt.Color(204, 102, 0));
-        jButton2.setForeground(new java.awt.Color(0, 0, 102));
-        jButton2.setText("EDIT");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        createData.setBackground(new java.awt.Color(0, 255, 51));
+        createData.setForeground(new java.awt.Color(0, 0, 102));
+        createData.setText("CREATE");
+        createData.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                createDataActionPerformed(evt);
             }
         });
-        managementData.add(jButton2);
-        jButton2.setBounds(330, 90, 140, 40);
+        managementData.add(createData);
+        createData.setBounds(330, 90, 350, 40);
 
-        jButton3.setBackground(new java.awt.Color(0, 255, 51));
-        jButton3.setForeground(new java.awt.Color(0, 0, 102));
-        jButton3.setText("CREATE");
-        managementData.add(jButton3);
-        jButton3.setBounds(520, 90, 160, 40);
-
-        jButton4.setBackground(new java.awt.Color(255, 0, 0));
-        jButton4.setForeground(new java.awt.Color(0, 0, 102));
-        jButton4.setText("DELETE");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        deleteData.setBackground(new java.awt.Color(255, 0, 0));
+        deleteData.setForeground(new java.awt.Color(0, 0, 102));
+        deleteData.setText("DELETE");
+        deleteData.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                deleteDataActionPerformed(evt);
             }
         });
-        managementData.add(jButton4);
-        jButton4.setBounds(130, 90, 130, 40);
+        managementData.add(deleteData);
+        deleteData.setBounds(130, 90, 180, 40);
 
-        jTable2.setBackground(new java.awt.Color(255, 255, 255));
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tableData.setBackground(new java.awt.Color(255, 255, 255));
+        tableData.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Provinsi", "UMP", "Harga Bahan Pangan"
             }
-        ));
-        jScrollPane2.setViewportView(jTable2);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tableData.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableDataMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(tableData);
 
         managementData.add(jScrollPane2);
         jScrollPane2.setBounds(130, 152, 550, 340);
@@ -293,21 +301,130 @@ public class Overview extends javax.swing.JFrame {
         pannelTab.setSelectedIndex(1);
     }//GEN-LAST:event_managemenDataMouseClicked
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void umpFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_umpFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_umpFieldActionPerformed
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void panganFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_panganFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_panganFieldActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void deleteDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteDataActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+        try {
+            if (provinceCombo.getSelectedItem().toString().isBlank()) {
+                throw new Exception("Tidak ada pilihan data yang ingin dihapus!");
+            }
+            
+            for (String item : provinceList) {
+                if(!item.equals(provinceCombo.getSelectedItem().toString())) {
+                    throw new Exception("Tidak ada data provinsi yang dihapus");
+                }
+            }
+            
+            provinceList.remove(provinceCombo.getSelectedItem().toString());
+            
+            umpTree.delete(Integer.parseInt(umpField.getText()));
+            panganTree.delete(Integer.parseInt(panganField.getText()));
+            
+            umpList.remove(Integer.parseInt(umpField.getText()));
+            panganList.remove(Integer.parseInt(panganField.getText()));
+            
+            JOptionPane.showMessageDialog(null, "Data telah dihapus");
+            resetTextField();
+            getData();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Terjadi Kesalahan", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_deleteDataActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void createDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createDataActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+        try {
+            String province = provinceCombo.getSelectedItem().toString();
+            String ump = umpField.getText();
+            String pangan = panganField.getText();
+
+            if (ump.isBlank() || pangan.isBlank()) {
+                throw new Exception("Kolom input tidak boleh kosong!");
+            }
+            
+            if(!ump.matches("\\d+") || !ump.matches("\\d+")) {
+                throw new Exception("UMP atau harga pangan harus numerik!");
+            }
+            
+            for(String item : provinceList) {
+                if(item.equals(province)) {
+                    throw new Exception("Data provinsi sudah ada!");
+                }
+            }
+            
+            Integer umpPrice = Integer.valueOf(ump);
+            Integer panganPrice = Integer.valueOf(pangan);
+
+            provinceList.add(province);
+            umpTree.insert(umpPrice);
+            panganTree.insert(panganPrice);
+            
+            umpList.add(Double.valueOf(umpPrice));
+            panganList.add(Double.valueOf(panganPrice));
+            
+            double correlation = LinearCorrelation.calculateCorrelation(umpList, panganList);
+            
+            System.out.println(correlation);
+            
+            treeList.add(ump);
+            treeList.add(pangan);
+            
+            JOptionPane.showMessageDialog(null, "Data berhasil ditambahkan");
+            
+            getData();
+            resetTextField();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Terjadi Kesalahan", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_createDataActionPerformed
+
+    private void tableDataMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableDataMouseClicked
+        // TODO add your handling code here:
+        int row = tableData.getSelectedRow();
+        DefaultTableModel model = (DefaultTableModel) tableData.getModel();
+        
+        provinceCombo.setEnabled(false);
+        
+        provinceCombo.setSelectedItem(model.getValueAt(row, 0).toString());
+        umpField.setText(model.getValueAt(row, 1).toString());
+        panganField.setText(model.getValueAt(row, 2).toString());
+    }//GEN-LAST:event_tableDataMouseClicked
+
+    private void getData() {
+        try {
+            // Check if data is null or empty
+            DefaultTableModel model = (DefaultTableModel) tableData.getModel();
+            model.setRowCount(0); // Clear existing rows
+
+            for (int i = 0; i < provinceList.size(); i++) {
+                String province = provinceList.get(i);
+                String ump = treeList.get(i*2);
+                String pangan = treeList.get(i*2+1);
+                
+                String row[] = {province, ump, pangan};
+                model.addRow(row);
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+    }
+
+    private void resetTextField() {
+        provinceCombo.setEnabled(true);
+        provinceCombo.setSelectedItem("Banten");
+        umpField.setText("");
+        panganField.setText("");
+    }
 
     /**
      * @param args the command line arguments
@@ -345,12 +462,10 @@ public class Overview extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.kelompok2.chart.CurveLineChart chart;
     private com.kelompok2.chart.CurveLineChart chart1;
+    private javax.swing.JButton createData;
     private com.kelompok2.chart.CurveLineChart curveLineChart1;
+    private javax.swing.JButton deleteData;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -358,9 +473,6 @@ public class Overview extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JLabel managemenData;
     private com.kelompok2.panel.PanelGradient managementData;
     private com.kelompok2.panel.PanelGradient overview;
@@ -369,7 +481,17 @@ public class Overview extends javax.swing.JFrame {
     private com.kelompok2.panel.PanelGradient panelGradient2;
     private com.kelompok2.panel.PanelGradient panelGradient7;
     private com.kelompok2.panel.PanelGradient panelGradient8;
+    private javax.swing.JTextField panganField;
     private javax.swing.JTabbedPane pannelTab;
+    private javax.swing.JComboBox<String> provinceCombo;
+    private javax.swing.JTable tableData;
     private javax.swing.JLabel title;
+    private javax.swing.JTextField umpField;
     // End of variables declaration//GEN-END:variables
+    private final ArrayList<String> treeList = new ArrayList<>();
+    private final ArrayList<String> provinceList = new ArrayList<>();
+    private final Tree umpTree = new Tree();
+    private final Tree panganTree = new Tree();
+    private final ArrayList<Double> umpList = new ArrayList<>();
+    private final ArrayList<Double> panganList = new ArrayList<>();
 }
